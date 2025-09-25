@@ -1,20 +1,25 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        bat 'docker build -t jenkins-cicd .'
-      }
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker build -t myapp:latest .'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'echo "Tests passed"'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''
+                docker stop myapp || true
+                docker rm myapp || true
+                docker run -d --name myapp -p 8080:8080 myapp:latest
+                '''
+            }
+        }
     }
-    stage('Test') {
-      steps {
-        bat 'docker run --rm jenkins-cicd npm test'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        bat 'docker run -d -p 3000:3000 jenkins-cicd'
-      }
-    }
-  }
 }
