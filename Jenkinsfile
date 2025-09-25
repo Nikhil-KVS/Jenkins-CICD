@@ -19,7 +19,7 @@ pipeline {
                 bat '''
                 docker stop myapp || echo Container not running
                 docker rm myapp || echo Container not present
-                docker run -d --name myapp -p 8080:8080 myapp:latest
+                docker run -d --name myapp -p 8081:8080 myapp:latest
                 '''
             }
         }
