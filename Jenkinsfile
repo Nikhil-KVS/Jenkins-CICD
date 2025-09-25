@@ -3,17 +3,17 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'docker build -t jenkins-cicd .'
+        sh 'docker build -t jenkins-cicd .'
       }
     }
     stage('Test') {
       steps {
-        bat 'docker run --rm jenkins-cicd npm test'
+        sh 'docker run --rm jenkins-cicd npm test'
       }
     }
     stage('Deploy') {
       steps {
-        bat 'docker run -d -p 3000:3000 jenkins-cicd'
+        sh 'docker run -d -p 3000:3000 jenkins-cicd'
       }
     }
   }
