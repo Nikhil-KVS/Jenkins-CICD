@@ -23,7 +23,8 @@ app will run inside a Docker container accessible on port 8081
 #Set GitHub Webhook for Auto-Trigger
 GitHub repo → Settings → Webhooks → Add webhook
 enter payload URL (it won't support http connections, use https)
-install ngrok and signin for https and run ngrok http 8080 (https://abc123.ngrok.io/github-webhook/ → http://localhost8080)
+install ngrok and signin → run ngrok config add-authtoken $YOUR_AUTHTOKEN in cmd to confiure ngrok into your machine
+run ngrok http 8080 (https://abc123.ngrok.io/github-webhook/ → http://localhost8080) and paste https URL in Payload URL
 Set Content type application/json, Select Just the push event and add webhook
 
 #by using webhook jenkins pipeline runs automatically if there is any push event
